@@ -1,0 +1,35 @@
+#this is an example of cleaning the data using GapMinder dataset:g1800s
+
+import pandas as pd
+
+#read files
+df = pd.read_csv("my_data.csv")
+df.head()
+df.info()
+df.describe()
+
+#data quality check
+def check_null_or_valid(row_data):
+    no_na = row_data.dropna()[1:-1]
+    numeric = pd.to_numeric(no_na)
+    ge0 = numeric >= 0
+    return ge0
+
+# Check whether the values in the row are valid
+assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
+
+
+#combine data
+gapminder = pd.concat([g1800s, g1900s,g2000s])
+
+#drop na values
+gapminder = gapminder.dropna(axis =0, how = 'any')
+
+#visualize the data
+import matplotlib.pyplot as plt
+g1800s.plot(kind= "scatter", x = '1800', y = '1899')
+plt.xlabel("life expectancy by country in 1800")
+plt.ylabel("life expectancy by country in 1899")
+plt.xlim(20,55)
+plt.xlim(20,55)
+plt.show()
